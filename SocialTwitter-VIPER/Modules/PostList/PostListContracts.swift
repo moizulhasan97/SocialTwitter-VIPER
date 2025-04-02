@@ -6,11 +6,13 @@
 //
 
 protocol PostListPresenter: AnyObject {
+    var posts: [Post] { get }
     func didTapCreatePost()
-    func getPosts()
+    func onAppear()
 }
 
 protocol PostListInteractorInput: AnyObject {
+    var posts: [Post] { get }
     func fetchPosts()
 }
 
