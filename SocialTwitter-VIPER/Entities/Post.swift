@@ -5,28 +5,28 @@
 //  Created by EBA on 01/04/2025.
 //
 
-import Foundation
+import SwiftUI
 
 final class Post: Identifiable, ObservableObject {
     let id: UUID
     let user: User
-    let imageName: String?
+    let image: Image?
     let description: String
     let time: Date
     private let internalConcurrentQueue = DispatchQueue(
         label: "com.socialTwitter-VIPER.Post.internalConcurrentQueue",
         attributes: .concurrent
     )
+    @Published private(set) var likes: Int
+    @Published private(set) var views: Int
     
-    private var views: Int
-    private var likes: Int
     //TODO: Handle comments
     //@Published var comments: Int
     
     init(
         id: UUID = .init(),
         user: User,
-        imageName: String? = nil,
+        image: Image? = nil,
         description: String,
         time: Date = .now,
         views: Int = 0,
@@ -34,7 +34,7 @@ final class Post: Identifiable, ObservableObject {
     ) {
         self.id = id
         self.user = user
-        self.imageName = imageName
+        self.image = image
         self.description = description
         self.time = time
         self.views = views
