@@ -13,13 +13,13 @@ final class LocalPostStorage: PostStorage {
         .init(
             id: .init(),
             user: .init(
-                id: .init(),
+                id: "1",
                 name: "First User",
                 username: "firstUser21",
                 isVerified: false,
-                profileImage: Image(.profileImage1)
+                profileImage: UIImage(named: "profileImage-1")!.jpegData(compressionQuality: 1.0)!
             ),
-            image: Image(.post),
+            image: UIImage(named: "postImage")!.jpegData(compressionQuality: 1.0),
               description: "This is a description for first post",
             time: .now,
               views: 10,
@@ -28,13 +28,13 @@ final class LocalPostStorage: PostStorage {
         .init(
             id: .init(),
             user: .init(
-                id: .init(),
+                id: "2",
                 name: "Second User",
                 username: "secondUser21",
                 isVerified: false,
-                profileImage: Image(.profileImage1)
+                profileImage: UIImage(named: "profileImage-1")!.jpegData(compressionQuality: 1.0)!
             ),
-            image: Image(.post),
+            image: UIImage(named: "postImage")!.jpegData(compressionQuality: 1.0),
               description: "This is a description for second post",
             time: Calendar.current.date(byAdding: .minute, value: 10, to: .now)!,
               views: 20,

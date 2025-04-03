@@ -28,7 +28,7 @@ fileprivate enum ActivityButton: CaseIterable {
 }
 
 struct PostView: View {
-    @ObservedObject var post: Post
+    let post: Post
     
     var body: some View {
         //
@@ -54,7 +54,7 @@ struct PostView: View {
     }
     
     private var userProfileImage: some View {
-        post.user.profileImage
+        Image(uiImage: .init(data: post.user.profileImage)!)
             .resizable()
             .roundedImage(width: PostViewConstants.userImageWidth, height: PostViewConstants.userImageHeight)
     }
@@ -85,7 +85,7 @@ struct PostView: View {
     }
     
     private var postImage: some View {
-        post.image!
+        Image(uiImage: .init(data: post.image!)!)
             .resizable()
             .frame(width: 250, height: 180)
             .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -219,9 +219,9 @@ fileprivate enum PostViewConstants {
             name: "first ddd name",
             username: "username",
             isVerified: false,
-            profileImage: Image(.profileImage1)
+            profileImage: UIImage(named: "profileImage-1")!.jpegData(compressionQuality: 1.0)!
         ),
-        image: Image(.post),
+        image: UIImage(named: "postImage")!.jpegData(compressionQuality: 1.0),
         description: "some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...",
         time: .init(),
         views: 100,

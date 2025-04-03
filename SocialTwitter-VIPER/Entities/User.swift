@@ -5,12 +5,12 @@
 //  Created by EBA on 01/04/2025.
 //
 
-import SwiftUI
+import Foundation
 
 struct User: Identifiable {
-    let id: UUID
+    let id: String
     let name: String
     let username: String
     let isVerified: Bool
-    let profileImage: Image
+    let profileImage: Data
 }
