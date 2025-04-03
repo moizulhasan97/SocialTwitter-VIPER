@@ -4,15 +4,15 @@
 //
 //  Created by EBA on 03/04/2025.
 //
+import Foundation
 
-protocol PostListPresenter: AnyObject {
+protocol PostListPresenter: ObservableObject {
     var posts: [Post] { get }
-    func didTapCreatePost()
     func onAppear()
+    func createPost(_ post: Post)
 }
 
 protocol PostListInteractorInput: AnyObject {
-    var posts: [Post] { get }
     func fetchPosts()
 }
 
