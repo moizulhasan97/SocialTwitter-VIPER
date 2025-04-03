@@ -1,5 +1,5 @@
 //
-//  PostListViewInteractor.swift
+//  PostListViewInteractorImpl.swift
 //  SocialTwitter-VIPER
 //
 //  Created by EBA on 03/04/2025.
@@ -8,11 +8,14 @@ import SwiftUI
 
 final class PostListViewInteractorImpl {
     
-    @Published private(set) var posts: [Post] = []
-    weak var presenter: PostListInteractorOutput?
+    weak private var presenter: PostListInteractorOutput?
     private let storage: PostStorage
     
-    init(storage: PostStorage) {
+    init(
+        presenter: PostListInteractorOutput?,
+        storage: PostStorage
+    ) {
+        self.presenter = presenter
         self.storage = storage
     }
 }
@@ -20,8 +23,7 @@ final class PostListViewInteractorImpl {
 // MARK: - PostListInteractorInput
 extension PostListViewInteractorImpl: PostListInteractorInput {
     func fetchPosts() {
-        let fetchedPostsFromStorage = storage.getPosts()
-        posts = fetchedPostsFromStorage
-        presenter?.didFetchPosts(fetchedPostsFromStorage)
+        let fetchedPosts = storage.getPosts()
+        presenter?.didFetchPosts(fetchedPosts)
     }
 }
