@@ -16,12 +16,19 @@ struct PostListView: View {
     
     var body: some View {
         NavigationStack {
+            //
+            filterSegmentedControl
+            //
             ScrollView {
+                //
                 LazyVStack {
+                    //
                     ForEach(presenter.posts.indices, id: \.self) { index in
+                        //
                         PostView(post: presenter.posts[index])
-                        
+                        //
                         if index != presenter.posts.count - 1 {
+                            //
                             Divider()
                         }
                         
@@ -33,6 +40,19 @@ struct PostListView: View {
         .onAppear {
             presenter.onAppear()
         }
+    }
+    
+    //Filters
+    private var filterSegmentedControl: some View {
+        //
+        Picker("Filter", selection: $presenter.selectedFilter) {
+            //
+            ForEach(PostFilter.allCases, id: \.self) { postFilter in
+                //
+                Text(postFilter.title).tag(postFilter)
+            }
+        }
+        .pickerStyle(.segmented)
     }
 }
 

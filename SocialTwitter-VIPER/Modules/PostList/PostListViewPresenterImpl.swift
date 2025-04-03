@@ -6,8 +6,29 @@
 //
 import Foundation
 
+enum PostFilter: CaseIterable {
+    case myPosts
+    case allPosts
+    
+    var title: String {
+        switch self {
+        case .myPosts:
+            return "My Posts"
+            
+        case .allPosts:
+            return "All Posts"
+        }
+    }
+}
+
 final class PostListViewPresenterImpl {
     @Published var posts: [Post] = []
+    @Published var selectedFilter: PostFilter = .allPosts {
+        didSet {
+            interactor.fetchPosts()
+        }
+    }
+    private let selectedUserID: String = "1"
     private let router: PostListRouter
     var interactor: PostListInteractorInput!
     
@@ -34,6 +55,6 @@ extension PostListViewPresenterImpl: PostListPresenter {
 // MARK: - PostListInteractorOutput
 extension PostListViewPresenterImpl: PostListInteractorOutput {
     func didFetchPosts(_ posts: [Post]) {
-        self.posts = posts
+        self.posts = selectedFilter == .myPosts ? posts.filter {$0.user.id == selectedUserID} : posts
     }
 }

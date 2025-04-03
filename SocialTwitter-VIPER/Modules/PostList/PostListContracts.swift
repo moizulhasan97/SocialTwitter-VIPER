@@ -8,6 +8,7 @@ import Foundation
 
 protocol PostListPresenter: ObservableObject {
     var posts: [Post] { get }
+    var selectedFilter: PostFilter { get }
     func onAppear()
     func createPost(_ post: Post)
 }
