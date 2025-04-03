@@ -63,19 +63,24 @@ struct PostView: View {
         HStack {
             //
             Text(post.user.name)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
                 .font(.headline)
                 .foregroundStyle(.white)
+                .truncationMode(.tail)
             //
             Text("\(post.user.username)")
                 .font(.caption)
                 .bold()
-                .foregroundStyle(.gray)
+                .foregroundStyle(Color.lightGray)
             //
             Spacer()
             //
             Text(post.time.formatted())
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
                 .font(.caption)
-                .foregroundStyle(.gray)
+                .foregroundStyle(Color.lightGray)
         }
     }
     
@@ -83,6 +88,7 @@ struct PostView: View {
         post.image!
             .resizable()
             .frame(width: 250, height: 180)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
             .padding(.top, 5)
     }
     
@@ -93,13 +99,10 @@ struct PostView: View {
     }
     
     private var activityButton: some View {
-        HStack {
+        HStack (spacing: 50) {
             commentButton
-            Spacer()
             viewButton
-            Spacer()
             likesButton
-            Spacer()
             shareButton
         }
     }
@@ -121,7 +124,7 @@ struct PostView: View {
                     )
                     .foregroundStyle(.white)
                 //
-                Text("0")
+                Text("\(post.views)")
                     .font(.caption)
                     .foregroundStyle(.white)
             }
@@ -145,7 +148,7 @@ struct PostView: View {
                     )
                     .foregroundStyle(.white)
                 //
-                Text("0")
+                Text("\(post.views)")
                     .font(.caption)
                     .foregroundStyle(.white)
             }
@@ -169,7 +172,7 @@ struct PostView: View {
                     )
                     .foregroundStyle(.white)
                 //
-                Text("0")
+                Text("\(post.likes)")
                     .font(.caption)
                     .foregroundStyle(.white)
             }
@@ -213,7 +216,7 @@ fileprivate enum PostViewConstants {
         id: .init(),
         user: .init(
             id: .init(),
-            name: "name",
+            name: "first ddd name",
             username: "username",
             isVerified: false,
             profileImage: Image(.profileImage1)
@@ -221,8 +224,8 @@ fileprivate enum PostViewConstants {
         image: Image(.post),
         description: "some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...",
         time: .init(),
-        views: 0,
-        likes: 0
+        views: 100,
+        likes: 100
     ))
     .background(.blue)
 }
