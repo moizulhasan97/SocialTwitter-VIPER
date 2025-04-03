@@ -9,21 +9,29 @@ import SwiftUI
 final class PostListViewInteractorImpl {
     
     weak private var presenter: PostListInteractorOutput?
-    private let storage: PostStorage
+    private let postStorage: PostStorage
+    private let userStorage: UserStorage
     
     init(
         presenter: PostListInteractorOutput?,
-        storage: PostStorage
+        postStorage: PostStorage,
+        userStorage: UserStorage
     ) {
         self.presenter = presenter
-        self.storage = storage
+        self.postStorage = postStorage
+        self.userStorage = userStorage
     }
 }
 
 // MARK: - PostListInteractorInput
 extension PostListViewInteractorImpl: PostListInteractorInput {
     func fetchPosts() {
-        let fetchedPosts = storage.getPosts()
+        let fetchedPosts = postStorage.getPosts()
         presenter?.didFetchPosts(fetchedPosts)
+    }
+    
+    func fetchUsers() {
+        let fetchedUsers = userStorage.getUsers()
+        presenter?.didFetchUsers(fetchedUsers)
     }
 }

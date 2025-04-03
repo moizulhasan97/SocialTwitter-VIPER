@@ -17,6 +17,8 @@ struct PostListView: View {
     var body: some View {
         NavigationStack {
             //
+            userDropdown
+            //
             filterSegmentedControl
             //
             ScrollView {
@@ -54,6 +56,18 @@ struct PostListView: View {
         }
         .pickerStyle(.segmented)
     }
+    
+    // User dropdown
+    private var userDropdown: some View {
+        //
+        Picker("Users", selection: $presenter.selectedUser) {
+            //
+            ForEach(presenter.users, id: \.self) { user in
+                //
+                Text(user.name).tag(user)
+            }
+        }
+    }
 }
 
 fileprivate class PreviewPostListRouter: PostListRouter {
@@ -61,6 +75,7 @@ fileprivate class PreviewPostListRouter: PostListRouter {
 }
 fileprivate class PreviewPostListInteractorInput: PostListInteractorInput {
     func fetchPosts() {}
+    func fetchUsers() {}
 }
 #Preview {
     PostListView(presenter: .init(router: PreviewPostListRouter(), interactor: PreviewPostListInteractorInput()))

@@ -9,7 +9,8 @@ final class PostListViewRouterImpl: PostListRouter {
     
     static func createPostListView() -> PostListView {
         let router: PostListRouter = PostListViewRouterImpl()
-        let storage: PostStorage = LocalPostStorage()
+        let postStorage: PostStorage = LocalPostStorage()
+        let userStorage: UserStorage = LocalUserStorage()
         
         let presenter = PostListViewPresenterImpl(
             router: router,
@@ -18,7 +19,8 @@ final class PostListViewRouterImpl: PostListRouter {
         
         let interactor = PostListViewInteractorImpl(
             presenter: presenter,
-            storage: storage
+            postStorage: postStorage,
+            userStorage: userStorage
         )
         presenter.interactor = interactor
         

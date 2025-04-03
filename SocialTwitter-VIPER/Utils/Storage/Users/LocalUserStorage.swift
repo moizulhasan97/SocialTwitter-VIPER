@@ -7,7 +7,7 @@
 
 final class LocalUserStorage: UserStorage {
     
-    private var users: [User] = []
+    private var users: [User] = MockUsers.users
     
     func getUsers() -> [User] {
         users

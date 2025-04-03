@@ -219,9 +219,9 @@ fileprivate enum PostViewConstants {
             name: "first ddd name",
             username: "username",
             isVerified: false,
-            profileImage: UIImage(named: "profileImage-1")!.jpegData(compressionQuality: 1.0)!
+            profileImage: UIImage(named: "user-01")!.jpegData(compressionQuality: 1.0)!
         ),
-        image: UIImage(named: "postImage")!.jpegData(compressionQuality: 1.0),
+        image: UIImage(named: "post-01")!.jpegData(compressionQuality: 1.0),
         description: "some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...",
         time: .init(),
         views: 100,
