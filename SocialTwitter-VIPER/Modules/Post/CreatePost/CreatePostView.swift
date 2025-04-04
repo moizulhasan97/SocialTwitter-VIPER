@@ -92,6 +92,9 @@ struct CreatePostView: View {
                 }
             }
         }
+        .onAppear {
+            presenter.setDismissAction(viewDismissal)
+        }
     }
     
     private var userImage: some View {
@@ -154,19 +157,12 @@ struct CreatePostView: View {
     }
 }
 
-// MARK: - CreatePostViewRouter
-extension CreatePostView: CreatePostViewRouter {
-    func dismiss() {
-        viewDismissal()
-    }
-}
-
 fileprivate final class MockCreatePostViewInteractorInputImpl: CreatePostViewInteractorInput {
     func createPost(_ post: Post) {}
 }
 
 fileprivate final class MockCreatePostViewRouterImpl: CreatePostViewRouter {
-    func dismiss() {}
+    func dismiss(_ action: DismissAction) {}
 }
 
 #Preview {

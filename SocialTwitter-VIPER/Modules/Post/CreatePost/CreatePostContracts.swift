@@ -5,7 +5,7 @@
 //  Created by EBA on 04/04/2025.
 //
 
-import Foundation
+import SwiftUI
 
 protocol CreatePostViewPresenter: ObservableObject {
     var postText: String { get }
@@ -16,6 +16,7 @@ protocol CreatePostViewPresenter: ObservableObject {
     func didTapPost()
     func didTapCancel()
     func didSelectImage(_ imageName: String)
+    func setDismissAction(_ action: DismissAction)
 }
 
 protocol CreatePostViewInteractorInput: AnyObject {
@@ -28,5 +29,5 @@ protocol CreatePostViewInteractorOutput: AnyObject {
 }
 
 protocol CreatePostViewRouter {
-    func dismiss()
+    func dismiss(_ viewDismissal: DismissAction)
 }

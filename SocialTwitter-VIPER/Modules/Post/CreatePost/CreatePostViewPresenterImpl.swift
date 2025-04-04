@@ -5,7 +5,7 @@
 //  Created by EBA on 04/04/2025.
 //
 
-import Foundation
+import SwiftUI
 
 final class CreatePostViewPresenterImpl: CreatePostViewPresenter {
     
@@ -17,6 +17,7 @@ final class CreatePostViewPresenterImpl: CreatePostViewPresenter {
     let user: User
     private let router: CreatePostViewRouter
     var interactor: CreatePostViewInteractorInput!
+    private var viewDismissal: DismissAction?
     
     init(
         user: User,
@@ -39,8 +40,12 @@ final class CreatePostViewPresenterImpl: CreatePostViewPresenter {
         interactor.createPost(post)
     }
     
+    func setDismissAction(_ action: DismissAction) {
+        viewDismissal = action
+    }
+    
     func didTapCancel() {
-        router.dismiss()
+        router.dismiss(viewDismissal!)
     }
     
     func didSelectImage(_ imageName: String) {
@@ -50,7 +55,7 @@ final class CreatePostViewPresenterImpl: CreatePostViewPresenter {
 
 extension CreatePostViewPresenterImpl: CreatePostViewInteractorOutput {
     func didPostWithSuccess() {
-        router.dismiss()
+        router.dismiss(viewDismissal!)
     }
     
     func didPostWithFailure(_ error: any Error) {

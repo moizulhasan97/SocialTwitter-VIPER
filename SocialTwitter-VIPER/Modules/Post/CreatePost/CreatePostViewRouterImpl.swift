@@ -4,17 +4,12 @@
 //
 //  Created by EBA on 04/04/2025.
 //
+import SwiftUI
 
 final class CreatePostViewRouterImpl {
-    
-    var view: CreatePostViewRouter?
-    
-    init(view: CreatePostViewRouter?) {
-        self.view = view
-    }
 
     static func createCreatePostView(user: User) -> CreatePostView {
-        let router = CreatePostViewRouterImpl(view: nil)
+        let router = CreatePostViewRouterImpl()
         let storage: PostStorage = LocalPostStorage()
         let interactor = CreatePostViewInteractorImpl(
             presenter: nil,
@@ -27,14 +22,13 @@ final class CreatePostViewRouterImpl {
         )
         interactor.presenter = presenter
         let view = CreatePostView(presenter: presenter)
-        router.view = view
         return view
     }
 }
 
 // MARK: - CreatePostViewRouter
 extension CreatePostViewRouterImpl: CreatePostViewRouter {
-    func dismiss() {
-        view?.dismiss()
+    func dismiss(_ action: DismissAction) {
+        action()
     }
 }
