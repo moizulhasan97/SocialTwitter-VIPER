@@ -28,6 +28,7 @@ struct PostListView: View {
                     ForEach(presenter.posts.indices, id: \.self) { index in
                         //
                         PostView(post: presenter.posts[index])
+                            //.equatable()
                         //
                         if index != presenter.posts.count - 1 {
                             //
@@ -46,27 +47,12 @@ struct PostListView: View {
     
     //Filters
     private var filterSegmentedControl: some View {
-        //
-        Picker("Filter", selection: $presenter.selectedFilter) {
-            //
-            ForEach(PostFilter.allCases, id: \.self) { postFilter in
-                //
-                Text(postFilter.title).tag(postFilter)
-            }
-        }
-        .pickerStyle(.segmented)
+        PostFilterView(selectedFilter: $presenter.selectedFilter)
     }
     
     // User dropdown
     private var userDropdown: some View {
-        //
-        Picker("Users", selection: $presenter.selectedUser) {
-            //
-            ForEach(presenter.users, id: \.self) { user in
-                //
-                Text(user.name).tag(user)
-            }
-        }
+        UserDropDownView(selectedUser: $presenter.selectedUser, users: presenter.users)
     }
 }
 
