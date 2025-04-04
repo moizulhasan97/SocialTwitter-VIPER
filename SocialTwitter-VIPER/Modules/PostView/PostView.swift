@@ -7,26 +7,6 @@
 
 import SwiftUI
 
-fileprivate enum ActivityButton: CaseIterable {
-    case comments, views, likes, share
-    
-    var image: Image {
-        switch self {
-        case .comments:
-            Image(systemName: "bubble.right.fill")
-            
-        case .views:
-            Image(systemName: "eye.fill")
-            
-        case .likes:
-            Image(systemName: "hand.thumbsup.fill")
-            
-        case .share:
-            Image(systemName: "arrowshape.turn.up.right.fill")
-        }
-    }
-}
-
 struct PostView: View {
     let post: Post
     
@@ -36,7 +16,10 @@ struct PostView: View {
             //
             userProfileImage
             //
-            VStack (alignment: .leading, spacing: 0) {
+            VStack (
+                alignment: .leading,
+                spacing: PostViewConstants.bodyVStackSpacing
+            ) {
                 //
                 postAuthorDetails
                 //
@@ -47,7 +30,10 @@ struct PostView: View {
                 }
                 //
                 activityButton
-                    .padding(.top, PostViewConstants.activityButtonsTopPadding)
+                    .padding(
+                        .top,
+                        PostViewConstants.activityButtonsTopPadding
+                    )
             }
         }
         .padding(.horizontal)
@@ -56,15 +42,18 @@ struct PostView: View {
     private var userProfileImage: some View {
         Image(uiImage: .init(data: post.user.profileImage)!)
             .resizable()
-            .roundedImage(width: PostViewConstants.userImageWidth, height: PostViewConstants.userImageHeight)
+            .roundedImage(
+                width: PostViewConstants.userImageWidth,
+                height: PostViewConstants.userImageHeight
+            )
     }
     
     private var postAuthorDetails: some View {
         HStack {
             //
             Text(post.user.name)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
+                .lineLimit(PostViewConstants.lineLimit)
+                .minimumScaleFactor(PostViewConstants.lineScaleFactor)
                 .font(.headline)
                 .foregroundStyle(.white)
                 .truncationMode(.tail)
@@ -77,8 +66,8 @@ struct PostView: View {
             Spacer()
             //
             Text(post.time.formatted())
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
+                .lineLimit(PostViewConstants.lineLimit)
+                .minimumScaleFactor(PostViewConstants.lineScaleFactor)
                 .font(.caption)
                 .foregroundStyle(Color.lightGray)
         }
@@ -87,9 +76,15 @@ struct PostView: View {
     private var postImage: some View {
         Image(uiImage: .init(data: post.image!)!)
             .resizable()
-            .frame(width: 250, height: 180)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .padding(.top, 5)
+            .frame(
+                width: PostViewConstants.postImageWidth,
+                height: PostViewConstants.postImageHeight
+            )
+            .clipShape(RoundedRectangle(cornerRadius: PostViewConstants.postImageCornerRadius))
+            .padding(
+                .top,
+                PostViewConstants.postImageTopPadding
+            )
     }
     
     private var postDescription: some View {
@@ -99,102 +94,9 @@ struct PostView: View {
     }
     
     private var activityButton: some View {
-        HStack (spacing: 50) {
-            commentButton
-            viewButton
-            likesButton
-            shareButton
-        }
-    }
-    
-    private var commentButton: some View {
-        Button(action: {
-            print("Comment pressed")
-        }) {
-            HStack (
-                alignment: .center,
-                spacing: PostViewConstants.activityButtonImageTextHorizontalSpacing
-            ) {
-                //
-                ActivityButton.comments.image
-                    .resizable()
-                    .frame(
-                        width: PostViewConstants.activityButtonWidth,
-                        height: PostViewConstants.activityButtonHeight
-                    )
-                    .foregroundStyle(.white)
-                //
-                Text("\(post.views)")
-                    .font(.caption)
-                    .foregroundStyle(.white)
-            }
-        }
-    }
-    
-    private var viewButton: some View {
-        Button(action: {
-            print("view pressed")
-        }) {
-            HStack (
-                alignment: .center,
-                spacing: PostViewConstants.activityButtonImageTextHorizontalSpacing
-            ) {
-                //
-                ActivityButton.views.image
-                    .resizable()
-                    .frame(
-                        width: PostViewConstants.activityButtonWidth,
-                        height: PostViewConstants.activityButtonHeight
-                    )
-                    .foregroundStyle(.white)
-                //
-                Text("\(post.views)")
-                    .font(.caption)
-                    .foregroundStyle(.white)
-            }
-        }
-    }
-    
-    private var likesButton: some View {
-        Button(action: {
-            print("likes pressed")
-        }) {
-            HStack (
-                alignment: .center,
-                spacing: PostViewConstants.activityButtonImageTextHorizontalSpacing
-            ) {
-                //
-                ActivityButton.likes.image
-                    .resizable()
-                    .frame(
-                        width: PostViewConstants.activityButtonWidth,
-                        height: PostViewConstants.activityButtonHeight
-                    )
-                    .foregroundStyle(.white)
-                //
-                Text("\(post.likes)")
-                    .font(.caption)
-                    .foregroundStyle(.white)
-            }
-        }
-    }
-    
-    private var shareButton: some View {
-        Button(action: {
-            print("share pressed")
-        }) {
-            HStack (
-                alignment: .center,
-                spacing: PostViewConstants.activityButtonImageTextHorizontalSpacing
-            ) {
-                //
-                ActivityButton.share.image
-                    .resizable()
-                    .frame(
-                        width: PostViewConstants.activityButtonWidth,
-                        height: PostViewConstants.activityButtonHeight
-                    )
-                    .foregroundStyle(.white)
+        HStack (spacing: PostViewConstants.activityButtonInterItemSpacing) {
+            ForEach(ActivityButton.allCases, id: \.self) { button in
+                ActivityButtonView(button: button, action: {})
             }
         }
     }
@@ -204,10 +106,15 @@ struct PostView: View {
 fileprivate enum PostViewConstants {
     static var userImageHeight: CGFloat = 40,
                userImageWidth: CGFloat = 40,
+               activityButtonInterItemSpacing: CGFloat = 50.0,
                activityButtonsTopPadding: CGFloat = 5.0,
-               activityButtonHeight: CGFloat = 15.0,
-               activityButtonWidth: CGFloat = 15.0,
-               activityButtonImageTextHorizontalSpacing: CGFloat = 2.0
+               postImageHeight: CGFloat = 180,
+               postImageWidth: CGFloat = 250,
+               postImageCornerRadius: CGFloat = 10.0,
+               postImageTopPadding: CGFloat = 5.0,
+               lineLimit: Int = 1,
+               lineScaleFactor: CGFloat = 0.5,
+               bodyVStackSpacing: CGFloat = 0.0
 }
 
 //MARK: - Preview
@@ -223,9 +130,7 @@ fileprivate enum PostViewConstants {
         ),
         image: UIImage(named: "post-01")!.jpegData(compressionQuality: 1.0),
         description: "some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...some long text...",
-        time: .init(),
-        views: 100,
-        likes: 100
+        time: .init()
     ))
     .background(.blue)
 }

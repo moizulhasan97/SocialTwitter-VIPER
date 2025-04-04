@@ -6,6 +6,29 @@
 //
 import SwiftUI
 
+enum ActivityButton: CaseIterable {
+    case comments,
+         views,
+         likes,
+         share
+    
+    var image: Image {
+        switch self {
+        case .comments:
+            Image(systemName: "bubble.right.fill")
+            
+        case .views:
+            Image(systemName: "eye.fill")
+            
+        case .likes:
+            Image(systemName: "hand.thumbsup.fill")
+            
+        case .share:
+            Image(systemName: "arrowshape.turn.up.right.fill")
+        }
+    }
+}
+
 struct ActivityButtonView: View {
     let button: ActivityButton
     let action: () -> Void
