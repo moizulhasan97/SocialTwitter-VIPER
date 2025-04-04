@@ -25,5 +25,6 @@ final class CreatePostViewInteractorImpl {
 extension CreatePostViewInteractorImpl: CreatePostViewInteractorInput {
     func createPost(_ post: Post) {
         storage.savePost(post)
+        presenter?.didPostWithSuccess()
     }
 }

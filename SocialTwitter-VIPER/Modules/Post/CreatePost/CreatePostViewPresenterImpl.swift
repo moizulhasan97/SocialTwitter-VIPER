@@ -12,10 +12,7 @@ final class CreatePostViewPresenterImpl: CreatePostViewPresenter {
     @Published var postText: String = ""
     @Published var selectedImage: String? = nil
     
-    let availableImages: [String] = ["photo", "camera", "globe", "book"]
-    var canPost: Bool {
-        !postText.isEmpty
-    }
+    let availableImages: [String] = ["post-01", "post-02", "post-03", "post-04", "post-05", "post-06"]
     
     let user: User
     private let router: CreatePostViewRouter

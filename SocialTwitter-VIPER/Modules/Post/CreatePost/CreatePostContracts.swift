@@ -12,7 +12,6 @@ protocol CreatePostViewPresenter: ObservableObject {
     var selectedImage: String? { get }
     var availableImages: [String] { get }
     var user: User { get }
-    var canPost: Bool { get }
     
     func didTapPost()
     func didTapCancel()
