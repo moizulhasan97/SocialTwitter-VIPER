@@ -38,6 +38,18 @@ struct PostListView: View {
                 }
             }
             .background(Color.blueThemeTwitter)
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {
+                        presenter.didTapCreateNewPost()
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $presenter.showCreatePostView) {
+            CreatePostViewRouterImpl.createCreatePostView(user: presenter.selectedUser)
         }
         .onAppear {
             presenter.onAppear()
@@ -56,7 +68,7 @@ struct PostListView: View {
 }
 
 fileprivate class PreviewPostListRouter: PostListRouter {
-    func navigateToCreatePost() {}
+    func navigateToCreatePost(user: User) {}
 }
 fileprivate class PreviewPostListInteractorInput: PostListInteractorInput {
     func fetchPosts() {}

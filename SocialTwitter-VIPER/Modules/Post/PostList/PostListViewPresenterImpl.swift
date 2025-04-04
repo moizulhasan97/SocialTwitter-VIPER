@@ -7,6 +7,7 @@
 import Foundation
 
 final class PostListViewPresenterImpl {
+    @Published var showCreatePostView: Bool = false
     @Published var posts: [Post] = []
     @Published var users: [User] = []
     @Published var selectedFilter: PostFilter = .allPosts {
@@ -33,8 +34,8 @@ final class PostListViewPresenterImpl {
 
 // MARK: - PostListPresenter
 extension PostListViewPresenterImpl: PostListPresenter {
-    func createPost(_ post: Post) {
-        router.navigateToCreatePost()
+    func didTapCreateNewPost() {
+        showCreatePostView = true
     }
     
     func onAppear() {

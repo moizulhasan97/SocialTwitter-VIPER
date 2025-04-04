@@ -27,10 +27,4 @@ final class PostListViewRouterImpl: PostListRouter {
         let postView = PostListView(presenter: presenter)
         return postView
     }
-    
-    func navigateToCreatePost() {
-        print("HADNLE NAVIGATION FOR CREATE POST")
-    }
-    
-    
 }

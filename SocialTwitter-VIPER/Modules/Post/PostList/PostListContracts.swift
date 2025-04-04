@@ -7,12 +7,13 @@
 import Foundation
 
 protocol PostListPresenter: ObservableObject {
+    var showCreatePostView: Bool { get }
     var posts: [Post] { get }
     var users: [User] { get }
     var selectedFilter: PostFilter { get }
     var selectedUser: User { get }
     func onAppear()
-    func createPost(_ post: Post)
+    func didTapCreateNewPost()
 }
 
 protocol PostListInteractorInput: AnyObject {
@@ -26,5 +27,5 @@ protocol PostListInteractorOutput: AnyObject {
 }
 
 protocol PostListRouter: AnyObject {
-    func navigateToCreatePost()
+    //func navigateToCreatePost(user: User)
 }
