@@ -28,7 +28,6 @@ struct PostListView: View {
                     ForEach(presenter.posts.indices, id: \.self) { index in
                         //
                         PostView(post: presenter.posts[index])
-                            //.equatable()
                         //
                         if index != presenter.posts.count - 1 {
                             //
