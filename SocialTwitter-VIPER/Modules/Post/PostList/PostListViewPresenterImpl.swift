@@ -7,6 +7,9 @@
 import Foundation
 
 final class PostListViewPresenterImpl {
+    
+    private let router: PostListRouter
+    var interactor: PostListInteractorInput!
     @Published var showCreatePostView: Bool = false
     @Published var posts: [Post] = []
     @Published var users: [User] = []
@@ -20,8 +23,9 @@ final class PostListViewPresenterImpl {
             interactor.fetchPosts()
         }
     }
-    private let router: PostListRouter
-    var interactor: PostListInteractorInput!
+    var postStorage: PostStorage {
+        interactor.storage
+    }
     
     init(
         router: PostListRouter,

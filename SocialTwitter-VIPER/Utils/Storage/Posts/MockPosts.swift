@@ -20,7 +20,7 @@ enum MockPosts {
             user:  MockUsers.users[0],
             image: UIImage(named: "post-02")!.jpegData(compressionQuality: 1.0),
               description: "This is a description for second post. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen",
-            time: Calendar.current.date(byAdding: .minute, value: 10, to: .now)!
+            time: .now
              ),
         .init(
             id: .init(),
@@ -34,7 +34,7 @@ enum MockPosts {
             user:  MockUsers.users[1],
             image: UIImage(named: "post-06")!.jpegData(compressionQuality: 1.0),
               description: "This is a description for second post. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen",
-            time: Calendar.current.date(byAdding: .minute, value: 10, to: .now)!
+            time: .now
              ),
         .init(
             id: .init(),
@@ -48,7 +48,7 @@ enum MockPosts {
             user:  MockUsers.users[2],
             image: UIImage(named: "post-04")!.jpegData(compressionQuality: 1.0),
               description: "This is a description for second post. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen",
-            time: Calendar.current.date(byAdding: .minute, value: 10, to: .now)!
+            time: .now
              ),
     ]
 }

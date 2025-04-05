@@ -17,6 +17,7 @@ protocol PostListPresenter: ObservableObject {
 }
 
 protocol PostListInteractorInput: AnyObject {
+    var storage: PostStorage { get }
     func fetchPosts()
     func fetchUsers()
 }

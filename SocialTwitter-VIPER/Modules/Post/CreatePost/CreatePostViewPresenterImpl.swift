@@ -33,7 +33,7 @@ final class CreatePostViewPresenterImpl: CreatePostViewPresenter {
         let post: Post = .init(
             id: UUID().uuidString,
             user: user,
-            image: selectedImage?.data(using: .utf8),
+            image: UIImage.init(named: selectedImage ?? "")?.jpegData(compressionQuality: 1.0) ?? nil,
             description: postText,
             time: .now
         )

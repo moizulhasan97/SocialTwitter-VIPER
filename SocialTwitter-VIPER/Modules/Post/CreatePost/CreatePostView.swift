@@ -118,7 +118,7 @@ struct CreatePostView: View {
             Text(presenter.user.username)
                 .font(.caption)
                 .bold()
-                .foregroundStyle(Color.lightGray)
+                .foregroundStyle(Color.customLightGray)
         }
     }
     

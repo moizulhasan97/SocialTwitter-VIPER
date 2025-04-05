@@ -49,7 +49,10 @@ struct PostListView: View {
             }
         }
         .sheet(isPresented: $presenter.showCreatePostView) {
-            CreatePostViewRouterImpl.createCreatePostView(user: presenter.selectedUser)
+            CreatePostViewRouterImpl.createCreatePostView(
+                user: presenter.selectedUser,
+                storage: presenter.postStorage
+            )
         }
         .onAppear {
             presenter.onAppear()
@@ -71,6 +74,7 @@ fileprivate class PreviewPostListRouter: PostListRouter {
     func navigateToCreatePost(user: User) {}
 }
 fileprivate class PreviewPostListInteractorInput: PostListInteractorInput {
+    var storage: any PostStorage {LocalPostStorage()}
     func fetchPosts() {}
     func fetchUsers() {}
 }

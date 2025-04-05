@@ -8,9 +8,9 @@ import SwiftUI
 
 final class CreatePostViewRouterImpl {
 
-    static func createCreatePostView(user: User) -> CreatePostView {
+    static func createCreatePostView(user: User, storage: PostStorage) -> CreatePostView {
         let router = CreatePostViewRouterImpl()
-        let storage: PostStorage = LocalPostStorage()
+        //let storage: PostStorage = LocalPostStorage()
         let interactor = CreatePostViewInteractorImpl(
             presenter: nil,
             storage: storage
@@ -21,8 +21,7 @@ final class CreatePostViewRouterImpl {
             interactor: interactor
         )
         interactor.presenter = presenter
-        let view = CreatePostView(presenter: presenter)
-        return view
+        return CreatePostView(presenter: presenter)
     }
 }
 

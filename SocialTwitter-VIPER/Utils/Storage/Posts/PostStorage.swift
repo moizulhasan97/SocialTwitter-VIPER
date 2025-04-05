@@ -6,6 +6,7 @@
 //
 
 protocol PostStorage {
+    var didUpdatePosts: (() -> Void)? { get set }
     func getPosts() -> [Post]
     func savePost(_ post: Post)
 }

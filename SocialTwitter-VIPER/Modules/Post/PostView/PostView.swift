@@ -61,7 +61,7 @@ struct PostView: View {
             Text("\(post.user.username)")
                 .font(.caption)
                 .bold()
-                .foregroundStyle(Color.lightGray)
+                .foregroundStyle(Color.customLightGray)
             //
             Spacer()
             //
@@ -69,7 +69,7 @@ struct PostView: View {
                 .lineLimit(PostViewConstants.lineLimit)
                 .minimumScaleFactor(PostViewConstants.lineScaleFactor)
                 .font(.caption)
-                .foregroundStyle(Color.lightGray)
+                .foregroundStyle(Color.customLightGray)
         }
     }
     

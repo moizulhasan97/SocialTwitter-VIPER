@@ -4,13 +4,16 @@
 //
 //  Created by EBA on 03/04/2025.
 //
-import SwiftUI
+import Foundation
 
 final class PostListViewInteractorImpl {
     
     weak private var presenter: PostListInteractorOutput?
-    private let postStorage: PostStorage
+    private var postStorage: PostStorage
     private let userStorage: UserStorage
+    var storage: PostStorage {
+        postStorage
+    }
     
     init(
         presenter: PostListInteractorOutput?,
@@ -20,6 +23,10 @@ final class PostListViewInteractorImpl {
         self.presenter = presenter
         self.postStorage = postStorage
         self.userStorage = userStorage
+        
+        self.postStorage.didUpdatePosts = { [weak self] in
+            self?.fetchPosts()
+        }
     }
 }
 
