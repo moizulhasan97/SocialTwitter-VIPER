@@ -21,7 +21,7 @@ final class CreatePostViewInteractorImpl {
     }
 }
 
-// MARK: - NewPostInteractorInput
+// MARK: - CreatePostViewInteractorInput
 extension CreatePostViewInteractorImpl: CreatePostViewInteractorInput {
     func createPost(_ post: Post) {
         storage.savePost(post)

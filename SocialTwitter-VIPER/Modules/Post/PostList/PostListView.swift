@@ -39,7 +39,9 @@ struct PostListView: View {
             }
             .background(Color.blueThemeTwitter)
             .toolbar {
+                //
                 ToolbarItem(placement: .primaryAction) {
+                    //
                     Button(action: {
                         presenter.didTapCreateNewPost()
                     }) {
@@ -70,9 +72,7 @@ struct PostListView: View {
     }
 }
 
-fileprivate class PreviewPostListRouter: PostListRouter {
-    func navigateToCreatePost(user: User) {}
-}
+fileprivate class PreviewPostListRouter: PostListRouter {}
 fileprivate class PreviewPostListInteractorInput: PostListInteractorInput {
     var storage: any PostStorage {LocalPostStorage()}
     func fetchPosts() {}

@@ -7,48 +7,6 @@
 
 import SwiftUI
 
-struct CustomTextEditor: View {
-    
-    @Binding var text: String
-    let height: CGFloat
-    let backgroundColor: Color
-    let cornerRadius: CGFloat
-    
-    init(
-        text: Binding<String>,
-        backgroundColor: Color = .init(uiColor: .systemGray6),
-        height: CGFloat = 150.0,
-        cornerRadius: CGFloat = 8.0
-    ) {
-        self._text = text
-        self.backgroundColor = backgroundColor
-        self.height = height
-        self.cornerRadius = cornerRadius
-    }
-    
-    var body: some View {
-        //
-        TextEditor(text: $text)
-            .frame(height: height)
-            .padding()
-            .background(Color(.systemGray6))
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-            .padding(.horizontal)
-    }
-}
-
-fileprivate enum CreatePostViewConstants {
-    static var navigationTitle: String = "Create A Post",
-               cancelButtonTitle: String = "Cancel",
-               postButtonTitle: String = "Post",
-               userProfileWidth: CGFloat = 40.0,
-               userProfileHeight: CGFloat = 40.0,
-               postImageHeight: CGFloat = 60.0,
-               postImageWidth: CGFloat = 60.0,
-               postImageBackgroundOpacity: CGFloat = 0.2,
-               postImageCornerRadius: CGFloat = 8.0
-}
-
 struct CreatePostView: View {
     
     @Environment(\.dismiss) var viewDismissal
@@ -155,6 +113,19 @@ struct CreatePostView: View {
             .padding()
         }
     }
+}
+
+// MARK: - Constants
+fileprivate enum CreatePostViewConstants {
+    static var navigationTitle: String = "Create A Post",
+               cancelButtonTitle: String = "Cancel",
+               postButtonTitle: String = "Post",
+               userProfileWidth: CGFloat = 40.0,
+               userProfileHeight: CGFloat = 40.0,
+               postImageHeight: CGFloat = 60.0,
+               postImageWidth: CGFloat = 60.0,
+               postImageBackgroundOpacity: CGFloat = 0.2,
+               postImageCornerRadius: CGFloat = 8.0
 }
 
 fileprivate final class MockCreatePostViewInteractorInputImpl: CreatePostViewInteractorInput {

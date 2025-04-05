@@ -10,7 +10,6 @@ final class CreatePostViewRouterImpl {
 
     static func createCreatePostView(user: User, storage: PostStorage) -> CreatePostView {
         let router = CreatePostViewRouterImpl()
-        //let storage: PostStorage = LocalPostStorage()
         let interactor = CreatePostViewInteractorImpl(
             presenter: nil,
             storage: storage
