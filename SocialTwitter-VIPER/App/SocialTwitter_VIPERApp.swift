@@ -11,7 +11,7 @@ import SwiftUI
 struct SocialTwitter_VIPERApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PostListViewRouterImpl.createPostListView()
         }
     }
 }
